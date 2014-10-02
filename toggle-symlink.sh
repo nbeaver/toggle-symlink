@@ -9,17 +9,17 @@ set -e
 
 # If the input file exists and is a symbolic link,
 # we want to turn it into a text file with the same name.
-if [ -L $* ]; then
-  TARGET=$(readlink --canonicalize-existing $*)
-  rm -- $*
-  echo "$TARGET" > $*
+if [ -L "$*" ]; then
+  TARGET=$(readlink --canonicalize-existing "$*")
+  rm -- "$*"
+  echo "$TARGET" > "$*"
 # However, if the input is a regular file with a non-zero size,
 # we want to turn it into a symbolic link to wherever its contents point.
-elif [ -f $* -a -s $* ]; then
-  TARGET=$(<$*)
+elif [ -f "$*" -a -s "$*" ]; then
+  TARGET=$(<"$*")
   # Check to see if the file contents are a valid path.
   if [ -e $TARGET ]; then
-    rm -- $*
+    rm -- "$*"
     ln --symbolic $TARGET "$*"
   else
     echo "\`$TARGET\` is not a valid target for a symbolic link."
