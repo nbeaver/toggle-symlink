@@ -15,6 +15,7 @@ cd example-symlinks/
 ln --symbolic --force --no-target-directory -- file.txt 'relative link to file.txt'
 ln --symbolic --force --no-target-directory -- file.txt '*'
 ln --symbolic --force --no-target-directory -- file.txt '--force *'
+ln --symbolic --force --no-target-directory -- 'relative link to file.txt' 'relative link to relative link to file.txt'
 cd -
 # Make an abolute link.
 ln --symbolic --force -- "$PWD/example-symlinks/file.txt" "$PWD/example-symlinks/absolute link to file.txt"
@@ -28,5 +29,7 @@ cd example-symlinks/
 ../toggle-symlink.sh '--force *'
 ../toggle-symlink.sh 'absolute link to file.txt'
 ../toggle-symlink.sh 'absolute link to file.txt'
+../toggle-symlink.sh 'relative link to relative link to file.txt'
+../toggle-symlink.sh 'relative link to relative link to file.txt'
 file -- *
 cd -

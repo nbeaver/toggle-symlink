@@ -19,11 +19,12 @@ if [ -L "$*" ]; then
 # However, if the input is a regular file with a non-zero size,
 # we want to turn it into a symbolic link to wherever its contents point.
 elif [ -f "$*" -a -s "$*" ]; then
+  # Store file contents in the $TARGET variable.
   TARGET=$(<"$*")
   # Check to see if the file contents are a valid path.
   if [ -e "$TARGET" ]; then
     rm -- "$*"
-    ln --symbolic -- $TARGET "$*"
+    ln --symbolic -- "$TARGET" "$*"
   else
     echo "\`$TARGET\` is not a valid target for a symbolic link."
     exit 2
