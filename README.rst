@@ -5,17 +5,24 @@ Toggling symbolic links.
 ========================
 
 :Author: Nathaniel Beaver
-:Date: $Date: 2014-10-01 (Thursday, 1 October 2014) $
+:Date: $Date: 2014-10-02 (Thursday, 2 October 2014) $
 
 -------------
 What is this?
 -------------
 
-This is a ``bash`` `script`_ to transform a symbolic link into a text file of the same name containing the target of the symbolic link.
+This is a ``bash`` `script`_ to transform a symbolic link (a.ka. "symlink") into a text file of the same name.
+The text file's contents are the target of the symbolic link.
 
 .. _script: ./toggle-symlink.sh
 
-It will also transform a text file into a symbolic link of the same name, provided the text file contains a valid file path.
+It will also do the inverse,
+i.e. transform a text file containing a valid file path
+into a symlink pointing to that target.
+
+There is also a `test script`_ to make sure it works properly.
+
+.. _test script: ./test.sh
 
 ------------------
 How do you use it?
@@ -25,7 +32,9 @@ Like this::
 
     $ bash toggle-symlink.sh my-symbolic-link
 
-Turning it back into a symlink is the same command.
+Turning it back into a symlink is the same.
+
+Run ``make`` or ``bash test.sh`` to run the tests.
 
 ------------------------------
 Why would you want to do this?
@@ -52,10 +61,10 @@ it cannot selectively sync individual files,
 so there is no workaround for internal file symlink conflicts.
 
 In these sorts of situations,
-it may be expedient to "turn off" symbolic links without deleting them,
-and retaining the target so that the symlink can be restored if necessary.
+it may be expedient to "turn off" symbolic links without deleting them.
 
-This script provides the means to do exactly that.
+This script provides the means to do exactly that,
+and can also restore the symlinks.
 
 ---------------
 Is this secure?
@@ -75,3 +84,10 @@ and using local variables when possible.
 
 At any rate,
 I do not recommend using this for anything important or running it as root.
+
+-----------------
+Is this portable?
+-----------------
+
+No, it just works with ``bash`` right now.
+Pull requests are welcome, though.
