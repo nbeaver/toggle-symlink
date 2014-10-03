@@ -15,11 +15,22 @@ This is a ``bash`` script to transform a symbolic link into a text file of the s
 
 It will also transform a text file into a symbolic link of the same name, provided the text file contains a valid file path.
 
+------------------
+How do you use it?
+------------------
+
+Like this::
+
+    $ bash toggle-symlink.sh my-symbolic-link
+
+Turning it back into a symlink is the same command.
+
 ------------------------------
 Why would you want to do this?
 ------------------------------
 
-Mostly there is no reason, but sometimes it is helpful to disable a symbolic link while retaining its name and target.
+Mainly it is just a shell-scripting exercise,
+but sometimes it is helpful to disable a symbolic link while retaining its name and target.
 
 For example, `Dropbox always follows symbolic links`_.
 This is useful for syncing files outside of the Dropbox folder.
@@ -43,3 +54,20 @@ it may be expedient to "turn off" symbolic links without deleting them,
 and retaining the target so that the symlink can be restored if necessary.
 
 This script provides the means to do exactly that.
+
+---------------
+Is this secure?
+---------------
+
+Not especially.
+The shell script must remove the original symbolic link with ``rm``,
+then write a file with the same name pointing to the symlink's target.
+Since this operation is not atomic,
+this script is vulnerable to a timing attack.
+ 
+However, much of the damage can be avoided by making sure quoting works correctly,
+passing ``--`` options terminators,
+and using shell script settings like ``nounset``, ``errexit``, and ``noclobber``.
+
+At any rate,
+I do not recommend using this for anything important or running it as root.
