@@ -13,7 +13,7 @@ set -o noclobber
 # If the input file exists and is a symbolic link,
 # we want to turn it into a text file with the same name.
 if [ -L "$*" ]; then
-  TARGET=$(readlink --canonicalize-existing "$*")
+  TARGET=$(readlink -- "$*")
   rm -- "$*"
   echo "$TARGET" > "$*"
 # However, if the input is a regular file with a non-zero size,
