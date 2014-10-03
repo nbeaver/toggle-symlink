@@ -11,7 +11,9 @@ Toggling symbolic links.
 What is this?
 -------------
 
-This is a ``bash`` script to transform a symbolic link into a text file of the same name containing the target of the symbolic link.
+This is a ``bash`` `script`_ to transform a symbolic link into a text file of the same name containing the target of the symbolic link.
+
+.. _script: ./toggle-symlink.sh
 
 It will also transform a text file into a symbolic link of the same name, provided the text file contains a valid file path.
 
@@ -60,14 +62,16 @@ Is this secure?
 ---------------
 
 Not especially.
-The shell script must remove the original symbolic link with ``rm``,
-then write a file with the same name pointing to the symlink's target.
+
+The shell script must remove the original symbolic link using ``rm``,
+then output a text file with the same name.
 Since this operation is not atomic,
 this script is vulnerable to a timing attack.
  
 However, much of the damage can be avoided by making sure to quote variables to avoid undesirable expansions,
 using ``--`` to end options,
-and using shell script settings like ``nounset``, ``errexit``, and ``noclobber``.
+and using shell script settings like ``nounset``, ``errexit``, and ``noclobber``,
+and using local variables when possible.
 
 At any rate,
 I do not recommend using this for anything important or running it as root.
