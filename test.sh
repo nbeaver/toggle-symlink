@@ -28,4 +28,5 @@ cd example-symlinks/
 ../toggle-symlink.sh '--force *'
 ../toggle-symlink.sh 'absolute link to file.txt'
 ../toggle-symlink.sh 'absolute link to file.txt'
+file -- *
 cd -
