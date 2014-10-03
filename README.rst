@@ -6,6 +6,7 @@ Toggling symbolic links.
 
 :Author: Nathaniel Beaver
 :Date: $Date: 2014-10-02 (Thursday, 2 October 2014) $
+:Description: Shell script to transform symbolic links to text files and back again.
 
 -------------
 What is this?
@@ -34,7 +35,7 @@ Like this::
 
 Turning it back into a symlink is the same.
 
-Run ``make`` or ``bash test.sh`` to run the tests.
+Run ``make`` or ``bash test.sh`` to make a directory with some symbolic links and run some tests.
 
 ------------------------------
 Why would you want to do this?
@@ -44,9 +45,10 @@ Mainly it is just a shell-scripting exercise,
 but sometimes it is helpful to disable a symbolic link while retaining its name and target.
 
 For example, `Dropbox always follows symbolic links`_.
-This is useful for syncing files outside of the Dropbox folder.
+This is useful for `syncing files outside of the Dropbox folder`_.
 
 .. _Dropbox always follows symbolic links: https://forums.dropbox.com/topic.php?id=7245
+.. _syncing files outside of the Dropbox folder: http://www.dropboxwiki.com/tips-and-tricks/sync-other-folders
 
 However, internal symlinks 
 (i.e. symlinks in the Dropbox folder pointing to files or folders inside the same Dropbox folder)
