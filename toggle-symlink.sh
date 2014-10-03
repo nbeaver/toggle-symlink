@@ -15,7 +15,7 @@ set -o noclobber
 if [ -L "$*" ]; then
   TARGET=$(readlink -- "$*")
   rm -- "$*"
-  echo "$TARGET" > "$*"
+  printf %s "$TARGET" > "$*"
 # However, if the input is a regular file with a non-zero size,
 # we want to turn it into a symbolic link to wherever its contents point.
 elif [ -f "$*" -a -s "$*" ]; then
@@ -33,7 +33,7 @@ else
   exit 1
 fi
 
-#TODO: terminate options to echo or switch to printf
+#DONE: use `printf` instead of `echo`
 #DONE: terminate options to readlink
 #TODO: check for broken symbolic links. Or maybe they should just be transformed normally?
 #TODO: check permissions.
