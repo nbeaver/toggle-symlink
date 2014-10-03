@@ -65,8 +65,8 @@ then write a file with the same name pointing to the symlink's target.
 Since this operation is not atomic,
 this script is vulnerable to a timing attack.
  
-However, much of the damage can be avoided by making sure quoting works correctly,
-passing ``--`` options terminators,
+However, much of the damage can be avoided by making sure to quote variables to avoid undesirable expansions,
+using ``--`` to end options,
 and using shell script settings like ``nounset``, ``errexit``, and ``noclobber``.
 
 At any rate,
