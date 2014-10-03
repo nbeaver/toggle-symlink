@@ -68,6 +68,15 @@ it may be expedient to "turn off" symbolic links without deleting them.
 This script provides the means to do exactly that,
 and can also restore the symlinks.
 
+--------------------------
+Has this been done before?
+--------------------------
+
+Yes.
+For example, ``git`` currently uses this strategy `to handle symlinks on Windows`_.
+
+.. _to handle symlinks on Windows: http://stackoverflow.com/questions/11662868/what-happens-when-i-clone-a-repository-with-symlinks-on-windows
+
 ---------------
 Is this secure?
 ---------------
