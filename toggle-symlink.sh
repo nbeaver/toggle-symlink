@@ -10,17 +10,15 @@ set -o errexit
 # Don't overwrite an existing file.
 set -o noclobber
 
-# If the input file exists and is a symbolic link,
-# we want to turn it into a text file with the same name.
-if [ -L "$*" ]; then
-  TARGET=$(readlink -- "$*")
+symlink_to_txt () {
+  local TARGET=$(readlink -- "$*")
   rm -- "$*"
   printf %s "$TARGET" > "$*"
-# However, if the input is a regular file with a non-zero size,
-# we want to turn it into a symbolic link to wherever its contents point.
-elif [ -f "$*" -a -s "$*" ]; then
+}
+
+txt_to_symlink() {
   # Store file contents in the $TARGET variable.
-  TARGET=$(<"$*")
+  local TARGET=$(<"$*")
   # Check to see if the file contents are a valid path.
   if [ -e "$TARGET" ]; then
     rm -- "$*"
@@ -29,6 +27,16 @@ elif [ -f "$*" -a -s "$*" ]; then
     echo "\`$TARGET\` is not a valid target for a symbolic link."
     exit 2
   fi
+}
+
+# If the input file exists and is a symbolic link,
+# we want to turn it into a text file with the same name.
+if [ -L "$*" ]; then
+  symlink_to_txt "$*"
+# However, if the input is a regular file with a non-zero size,
+# we want to turn it into a symbolic link to wherever its contents point.
+elif [ -f "$*" -a -s "$*" ]; then
+  txt_to_symlink "$*"
 else
   echo "\`$*\` is not an symbolic link or regular file."
   exit 1
