@@ -33,7 +33,8 @@ else
   exit 1
 fi
 
-#
+#TODO: terminate options to echo or switch to printf
+#TODO: terminate options to readlink
 #TODO: check for broken symbolic links. Or maybe they should just be transformed normally?
 #TODO: check permissions.
 #TODO: preserve permissions?
