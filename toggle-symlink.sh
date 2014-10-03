@@ -21,7 +21,7 @@ if [ -L "$*" ]; then
 elif [ -f "$*" -a -s "$*" ]; then
   TARGET=$(<"$*")
   # Check to see if the file contents are a valid path.
-  if [ -e $TARGET ]; then
+  if [ -e "$TARGET" ]; then
     rm -- "$*"
     ln --symbolic -- $TARGET "$*"
   else
@@ -34,7 +34,7 @@ else
 fi
 
 #TODO: terminate options to echo or switch to printf
-#TODO: terminate options to readlink
+#DONE: terminate options to readlink
 #TODO: check for broken symbolic links. Or maybe they should just be transformed normally?
 #TODO: check permissions.
 #TODO: preserve permissions?
