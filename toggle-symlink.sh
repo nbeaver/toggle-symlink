@@ -1,4 +1,8 @@
 #!/usr/bin/env bash
+
+# Enable POSIX compatibility mode for portability.
+set -o posix
+
 # Treat unset variables and parameters
 # other than the special parameters "@" and "*"
 # as an error when performing parameter expansion.
