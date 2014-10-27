@@ -68,6 +68,11 @@ it may be expedient to "turn off" symbolic links without deleting them.
 This script provides the means to do exactly that,
 and can also restore the symlinks.
 
+Also, if the path is long and deeply nested and the fix relatively small,
+it may be easier to convert it to a text file and apply the fix with a text editor,
+then convert it back.
+This also avoids the danger of accidentally inverting the source and target.
+
 --------------------------
 Has this been done before?
 --------------------------
