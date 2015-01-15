@@ -15,9 +15,9 @@ set -o errexit
 set -o noclobber
 
 symlink_to_txt () {
-  local TARGET=$(readlink -- "$*")
-  rm -- "$*"
-  printf %s "$TARGET" > "$*"
+	local TARGET=$(readlink -- "$*")
+	rm -- "$*"
+	printf %s "$TARGET" > "$*"
 }
 
 txt_to_symlink() {
@@ -33,21 +33,35 @@ txt_to_symlink() {
   fi
 }
 
-# If the input file exists and is a symbolic link,
-# we want to turn it into a text file with the same name.
-if [ -L "$*" ]; then
-  symlink_to_txt "$*"
-# However, if the input is a regular file with a non-zero size,
-# we want to turn it into a symbolic link to wherever its contents point.
-elif [ -f "$*" -a -s "$*" ]; then
-  txt_to_symlink "$*"
-else
-  echo "\`$*\` is not an symbolic link or regular file."
-  exit 1
+toggle_symlink() {
+  # If the input file exists and is a symbolic link (-L),
+  # we want to turn it into a text file with the same name.
+  if [ -L "$*" ]; then
+    symlink_to_txt "$*"
+  # However, if the input is a regular file with a non-zero size,
+  # we want to turn it into a symbolic link to wherever its contents point.
+  elif [ -f "$*" -a -s "$*" ]; then
+    txt_to_symlink "$*"
+  else
+    echo "Warning: did not convert \`$*\` because is not a symbolic link or regular file."
+    return 1
+  fi
+}
+
+# Show usage information if there are no arguments.
+if [ $# == 0 ] ; then
+  echo "Usage: toggle-symlink.sh command-name"
+  exit 1;
 fi
+
+for file in "$@"
+do
+  toggle_symlink "$file"
+done
 
 #DONE: use `printf` instead of `echo`
 #DONE: terminate options to readlink
+#TODO: handle multiple files
 #TODO: check for broken symbolic links. Or maybe they should just be transformed normally?
 #TODO: check permissions.
 #TODO: preserve permissions?
