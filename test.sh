@@ -32,4 +32,8 @@ cd example-symlinks/
 ../toggle-symlink.sh 'relative link to relative link to file.txt'
 ../toggle-symlink.sh 'relative link to relative link to file.txt'
 file -- *
+# Toggle them all at once.
+../toggle-symlink.sh 'relative link to file.txt' '*' '--force *' 'absolute link to file.txt' 'relative link to relative link to file.txt'
+../toggle-symlink.sh 'relative link to file.txt' '*' '--force *' 'absolute link to file.txt' 'relative link to relative link to file.txt'
+file -- *
 cd -
