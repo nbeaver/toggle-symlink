@@ -8,16 +8,13 @@ set -o posix
 # as an error when performing parameter expansion.
 set -o nounset
 
-# Terminate as soon as any command fails.
-set -o errexit
-
 # Don't overwrite an existing file.
 set -o noclobber
 
 symlink_to_txt () {
-	local TARGET=$(readlink -- "$*")
-	rm -- "$*"
-	printf %s "$TARGET" > "$*"
+  local TARGET=$(readlink -- "$*")
+  rm -- "$*"
+  printf %s "$TARGET" > "$*"
 }
 
 txt_to_symlink() {
@@ -28,8 +25,8 @@ txt_to_symlink() {
     rm -- "$*"
     ln --symbolic -- "$TARGET" "$*"
   else
-    echo "\`$TARGET\` is not a valid target for a symbolic link."
-    exit 2
+    echo "Warning: did not convert \`$file\` because \`$TARGET\` is not a valid target for a symbolic link."
+    return 2
   fi
 }
 
@@ -38,12 +35,12 @@ toggle_symlink() {
   # we want to turn it into a text file with the same name.
   if [ -L "$*" ]; then
     symlink_to_txt "$*"
-  # However, if the input is a regular file with a non-zero size,
+  # However, if the input is a regular file (-f) with a non-zero size (-s),
   # we want to turn it into a symbolic link to wherever its contents point.
   elif [ -f "$*" -a -s "$*" ]; then
     txt_to_symlink "$*"
   else
-    echo "Warning: did not convert \`$*\` because is not a symbolic link or regular file."
+    echo "Warning: did not convert \`$file\` because is not a symbolic link or regular file."
     return 1
   fi
 }
