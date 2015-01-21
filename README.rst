@@ -105,5 +105,16 @@ I do not recommend using this for anything important or running it as root.
 Is this portable?
 -----------------
 
-No, it just works with ``bash`` right now.
-Pull requests are welcome, though.
+I run it in ``bash`` with ``set -o posix``.
+However, this is not a guarantee of portability.
+
+----
+TODO
+----
+
+- DONE: use `printf` instead of `echo`
+- DONE: terminate options to readlink
+- DONE: handle multiple files
+- TODO: check for broken symbolic links. Or maybe they should just be transformed normally?
+- TODO: preserve modification time?
+- TODO: check for race conditions?

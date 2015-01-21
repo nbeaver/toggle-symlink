@@ -55,12 +55,3 @@ for file in "$@"
 do
 	toggle_symlink "$file"
 done
-
-#DONE: use `printf` instead of `echo`
-#DONE: terminate options to readlink
-#TODO: handle multiple files
-#TODO: check for broken symbolic links. Or maybe they should just be transformed normally?
-#TODO: check permissions.
-#TODO: preserve permissions?
-#TODO: preserve modification time?
-#TODO: check for race conditions?
