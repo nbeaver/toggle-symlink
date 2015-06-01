@@ -12,14 +12,14 @@ set -o nounset
 set -o noclobber
 
 symlink_to_txt () {
-	local TARGET=$(readlink -- "$*")
+	local TARGET="$(readlink -- "$*")"
 	rm -- "$*"
 	printf %s "$TARGET" > "$*"
 }
 
 txt_to_symlink() {
 	# Store file contents in the $TARGET variable.
-	local TARGET=$(<"$*")
+	local TARGET="$(<"$*")"
 	# Check to see if the file contents are a valid path.
 	if [ -e "$TARGET" ]; then
 		rm -- "$*"
