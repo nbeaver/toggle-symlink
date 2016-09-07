@@ -13,8 +13,6 @@ echo "This is not a valid symlink path." > example-symlinks/file.txt
 # Make relative links.
 cd example-symlinks/
 ln --symbolic --force --no-target-directory -- file.txt 'relative link to file.txt'
-ln --symbolic --force --no-target-directory -- file.txt '*'
-ln --symbolic --force --no-target-directory -- file.txt '--force *'
 ln --symbolic --force --no-target-directory -- 'relative link to file.txt' 'relative link to relative link to file.txt'
 cd -
 # Make an abolute link.
@@ -23,17 +21,13 @@ ln --symbolic --force -- "$PWD/example-symlinks/file.txt" "$PWD/example-symlinks
 cd example-symlinks/
 ../toggle-symlink.sh 'relative link to file.txt'
 ../toggle-symlink.sh 'relative link to file.txt'
-../toggle-symlink.sh '*'
-../toggle-symlink.sh '*'
-../toggle-symlink.sh '--force *'
-../toggle-symlink.sh '--force *'
 ../toggle-symlink.sh 'absolute link to file.txt'
 ../toggle-symlink.sh 'absolute link to file.txt'
 ../toggle-symlink.sh 'relative link to relative link to file.txt'
 ../toggle-symlink.sh 'relative link to relative link to file.txt'
 file -- *
 # Toggle them all at once.
-../toggle-symlink.sh 'relative link to file.txt' '*' '--force *' 'absolute link to file.txt' 'relative link to relative link to file.txt'
-../toggle-symlink.sh 'relative link to file.txt' '*' '--force *' 'absolute link to file.txt' 'relative link to relative link to file.txt'
+../toggle-symlink.sh 'relative link to file.txt' 'absolute link to file.txt' 'relative link to relative link to file.txt'
+../toggle-symlink.sh 'relative link to file.txt' 'absolute link to file.txt' 'relative link to relative link to file.txt'
 file -- *
 cd -
