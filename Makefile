@@ -2,7 +2,7 @@
 .PHONY : all
 all:
 	./test.sh
-	rst2html README.rst > README.html
+	rst2html README.rst README.html
 
 # Prevent make from looking for a file called 'clean'
 .PHONY: clean
