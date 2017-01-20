@@ -118,3 +118,11 @@ TODO
 - TODO: check for broken symbolic links. Or maybe they should just be transformed normally?
 - TODO: preserve modification time?
 - TODO: check for race conditions?
+
+-------
+License
+-------
+
+This project is licensed under the terms of the `MIT license`_.
+
+.. _MIT license: LICENSE.txt
