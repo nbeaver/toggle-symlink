@@ -7,7 +7,6 @@ set -o nounset
 # Terminate as soon as any command fails.
 set -o errexit
 
-chmod +x toggle-symlink.sh
 mkdir -p example-symlinks/
 echo "This is not a valid symlink path." > example-symlinks/file.txt
 # Make relative links.
