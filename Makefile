@@ -1,11 +1,17 @@
-# Prevent make from looking for a file called 'all'
-.PHONY : all
-all:
-	./test.sh
-	rst2html README.rst README.html
+SH :=$(wildcard *.sh)
+RST :=$(wildcard *.rst)
+HTML :=$(patsubst %.rst, %.html, $(RST))
 
-# Prevent make from looking for a file called 'clean'
-.PHONY: clean
+.PHONY : all clean shellcheck
+
+all: $(HTML)
+	./test.sh
+
+%.html : %.rst
+	rst2html $< $@
+
+shellcheck:
+	shellcheck $(SH)
+
 clean:
-	rm --recursive --force -- example-symlinks/
-	rm --force README.html
+	rm -f -- $(HTML)
