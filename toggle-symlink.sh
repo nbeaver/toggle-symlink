@@ -18,11 +18,19 @@ symlink_to_txt () {
 }
 
 txt_to_symlink() {
+    local SOURCE="$*"
     # Store file contents in the $TARGET variable.
-    local TARGET="$(<"$*")"
-    # TODO: move it to a temp file and check if the ln succeeeds.
-    rm -- "$*"
-    ln --symbolic -- "$TARGET" "$*"
+    local TARGET="$(<"$SOURCE")"
+    local TMP="$(mktemp)"
+    mv -- "$SOURCE" "$TMP"
+    if ln --symbolic -- "$TARGET" "$SOURCE"
+    then
+        rm -- "$TMP"
+        return 0
+    else
+        mv -- "$TMP" "$SOURCE"
+        return 1
+    fi
 }
 
 toggle_symlink() {
