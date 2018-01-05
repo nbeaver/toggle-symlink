@@ -29,6 +29,7 @@ txt_to_symlink() {
         return 0
     else
         mv -- "$TMP" "$SOURCE"
+        printf 'Error: could not convert to symlink: %s\n' "$SOURCE"
         return 1
     fi
 }
@@ -47,7 +48,7 @@ toggle_symlink() {
         txt_to_symlink "$*"
         return 0
     else
-        printf 'Error: did not convert `%s` because it is not a symbolic link or regular file.' "$*"
+        printf 'Error: not a symbolic link or regular file: %s\n' "$*"
         return 1
     fi
 }
@@ -65,6 +66,6 @@ do
     then
         toggle_symlink "$file"
     else
-        printf 'Warning: path does not exist: %s' "$file"
+        printf 'Warning: path does not exist: %s\n' "$file"
     fi
 done
