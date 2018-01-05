@@ -8,7 +8,6 @@ set -o nounset
 set -o errexit
 
 DIR="$(mktemp --directory)"
-printf 'Temporary directory: %s\n' "$DIR" >&2
 
 printf 'This is not a valid symlink path.' > "$DIR"/'file.txt'
 
@@ -20,7 +19,6 @@ ln -s -- 'relative link to file.txt' "$DIR/"'relative link to relative link to f
 ln -s -- "$DIR/file.txt" "$DIR/absolute link to file.txt"
 
 # Test the toggling capability of each one.
-set -x
 ./toggle-symlink.sh "$DIR"/'relative link to file.txt'
 ./toggle-symlink.sh "$DIR"/'relative link to file.txt'
 
@@ -40,4 +38,3 @@ set -x
     "$DIR"/'relative link to file.txt' \
     "$DIR"/'absolute link to file.txt' \
     "$DIR"/'relative link to relative link to file.txt'
-set +x
