@@ -8,13 +8,18 @@ set -o posix
 # as an error when performing parameter expansion.
 set -o nounset
 
-# Don't overwrite an existing file.
-set -o noclobber
-
 symlink_to_txt () {
-    local TARGET="$(readlink -- "$*")"
-    rm -- "$*"
-    printf '%s' "$TARGET" > "$*"
+    local SOURCE="$*"
+    local TARGET="$(readlink -- "$SOURCE")"
+    local TMP="$(mktemp)"
+    printf '%s' "$TARGET" > "$TMP"
+    if mv -T -- "$TMP" "$TARGET"
+    then
+        return 0
+    else
+        printf 'Error: could not convert symlink to text: %s\n' "$SOURCE"
+        return 1
+    fi
 }
 
 txt_to_symlink() {
