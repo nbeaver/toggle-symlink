@@ -1,4 +1,4 @@
 - [x] Test script.
 - [x] Use temporary directory.
-- [ ] Add shellcheck target to Makefile.
+- [x] Add shellcheck target to Makefile.
 - [ ] Fix shellcheck warnings.
