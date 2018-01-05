@@ -20,15 +20,9 @@ symlink_to_txt () {
 txt_to_symlink() {
     # Store file contents in the $TARGET variable.
     local TARGET="$(<"$*")"
-    # Check to see if the file contents are a valid path.
-    if test -e "$TARGET"
-    then
-        rm -- "$*"
-        ln --symbolic -- "$TARGET" "$*"
-    else
-        printf 'Error: did not convert `%s` because `%s` is not a valid target for a symbolic link.' "$file" "$target"
-        return 2
-    fi
+    # TODO: move it to a temp file and check if the ln succeeeds.
+    rm -- "$*"
+    ln --symbolic -- "$TARGET" "$*"
 }
 
 toggle_symlink() {
