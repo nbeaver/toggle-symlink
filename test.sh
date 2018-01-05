@@ -10,11 +10,11 @@ set -o errexit
 
 DIR="$(mktemp --directory)"
 
-printf 'This is not a valid symlink path.' > "$DIR"/'file.txt'
+printf 'This is not a valid symlink path.' > "$DIR/file.txt"
 
 # Make relative links.
-ln -s -- file.txt "$DIR/"'relative link to file.txt'
-ln -s -- 'relative link to file.txt' "$DIR/"'relative link to relative link to file.txt'
+ln -s -- file.txt "$DIR/relative link to file.txt"
+ln -s -- 'relative link to file.txt' "$DIR/relative link to relative link to file.txt"
 
 # Make an abolute link.
 ln -s -- "$DIR/file.txt" "$DIR/absolute link to file.txt"
@@ -42,11 +42,11 @@ function test_toggle {
 }
 
 # Test the toggling capability of each one.
-test_toggle "$DIR"/'relative link to file.txt'
+test_toggle "$DIR/relative link to file.txt"
 
-test_toggle "$DIR"/'absolute link to file.txt'
+test_toggle "$DIR/absolute link to file.txt"
 
-test_toggle "$DIR"/'relative link to relative link to file.txt'
+test_toggle "$DIR/relative link to relative link to file.txt"
 
 # Toggle them all at once.
 ./toggle-symlink.sh \
