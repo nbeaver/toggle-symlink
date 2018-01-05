@@ -13,7 +13,7 @@ symlink_to_txt () {
     local TARGET="$(readlink -- "$SOURCE")"
     local TMP="$(mktemp)"
     printf '%s' "$TARGET" > "$TMP"
-    if mv -T -- "$TMP" "$TARGET"
+    if mv -T -- "$TMP" "$SOURCE"
     then
         return 0
     else
