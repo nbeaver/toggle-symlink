@@ -67,10 +67,5 @@ fi
 
 for file in "$@"
 do
-    if test -f "$file"
-    then
-        toggle_symlink "$file"
-    else
-        printf 'Warning: path does not exist: %s\n' "$file"
-    fi
+    toggle_symlink "$file"
 done
