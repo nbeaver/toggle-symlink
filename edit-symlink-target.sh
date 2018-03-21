@@ -6,6 +6,9 @@ then
     exit 1
 fi
 
-toggle-symlink.sh "$*"
-editor "$*"
-toggle-symlink.sh "$*"
+for symlink in "$@"
+do
+    toggle-symlink.sh "$symlink"
+    editor "$symlink"
+    toggle-symlink.sh "$symlink"
+done
