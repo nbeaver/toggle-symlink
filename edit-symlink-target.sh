@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 
-if test -z "$*"
+if test "$#" -eq 0
 then
-    printf "Usage: edit-symlink-target name-of-symlink\n"
+    printf 'Usage: %s name-of-symlink\n' "$0"
     exit 1
-else
-    toggle-symlink.sh "$*"
-    editor "$*"
-    toggle-symlink.sh "$*"
 fi
+
+toggle-symlink.sh "$*"
+editor "$*"
+toggle-symlink.sh "$*"
