@@ -2,3 +2,4 @@
 - [x] Use temporary directory.
 - [x] Add shellcheck target to Makefile.
 - [ ] Fix shellcheck warnings.
+- [ ] Consider doing this as bash aliases instead.
