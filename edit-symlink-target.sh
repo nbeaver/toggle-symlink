@@ -6,6 +6,11 @@ then
     exit 1
 fi
 
+if ! type toggle-symlink.sh
+then
+    exit 1
+fi
+
 for symlink in "$@"
 do
     toggle-symlink.sh "$symlink"
