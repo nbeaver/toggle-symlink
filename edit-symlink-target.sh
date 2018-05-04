@@ -6,7 +6,7 @@ then
     exit 1
 fi
 
-if ! type toggle-symlink.sh
+if ! type toggle-symlink.sh > /dev/null
 then
     exit 1
 fi
