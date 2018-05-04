@@ -8,6 +8,7 @@ fi
 
 if ! type toggle-symlink.sh > /dev/null
 then
+    printf 'Cannot find toggle-symlink.sh in $PATH\n' >&2
     exit 1
 fi
 
